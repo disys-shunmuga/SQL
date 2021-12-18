@@ -1,0 +1,243 @@
+mysql> SELECT * FROM Worker;
++-----------+------------+-----------+--------+--------------+------------+
+| Worker_Id | First_name | Last_name | Salary | Joining_date | Department |
++-----------+------------+-----------+--------+--------------+------------+
+|         1 | MonikA     | Arora     | 100000 | 2014-02-20   | HR         |
+|         2 | NihArikA   | Vema      |  80000 | 2014-06-11   | ADMIN      |
+|         3 | VishAl     | Singhal   | 300000 | 2014-02-20   | HR         |
+|         4 | AmitAbh    | Singh     | 500000 | 2014-02-20   | ADMIN      |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11   | ADMIN      |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-20   | ACCOUNT    |
+|         7 | SAthish    | Kumar     | 750000 | 2014-01-20   | ACCOUNT    |
+|         8 | GeethikA   | Chawhan   |  90000 | 2014-04-11   | ADMIN      |
++-----------+------------+-----------+--------+--------------+------------+
+
+UPDATE Worker
+SET First_name = REPLACE(First_name,'a','A');
+
+mysql> SELECT First_name FROM Worker;
++------------+
+| First_name |
++------------+
+| MonikA     |
+| NihArikA   |
+| VishAl     |
+| AmitAbh    |
+| Vivek      |
+| Vipul      |
+| SAthish    |
+| GeethikA   |
++------------+
+8 rows in set (0.00 sec)
+
+
+
+mysql> SELECT * FROM Worker
+    -> ORDER BY First_name ASC,Department DESC;
++-----------+------------+-----------+--------+--------------+------------+
+| Worker_Id | First_name | Last_name | Salary | Joining_date | Department |
++-----------+------------+-----------+--------+--------------+------------+
+|         4 | AmitAbh    | Singh     | 500000 | 2014-02-20   | ADMIN      |
+|         8 | GeethikA   | Chawhan   |  90000 | 2014-04-11   | ADMIN      |
+|         1 | MonikA     | Arora     | 100000 | 2014-02-20   | HR         |
+|         2 | NihArikA   | Vema      |  80000 | 2014-06-11   | ADMIN      |
+|         7 | SAthish    | Kumar     | 750000 | 2014-01-20   | ACCOUNT    |
+|         6 | Vipul      | Diwan     | 200000 | 2014-06-20   | ACCOUNT    |
+|         3 | VishAl     | Singhal   | 300000 | 2014-02-20   | HR         |
+|         5 | Vivek      | Bhati     | 500000 | 2014-06-11   | ADMIN      |
++-----------+------------+-----------+--------+--------------+------------+
+8 rows in set (0.00 sec)
+
+
+
+mysql> CREATE TABLE Temp SELECT * FROM Worker;
+Query OK, 8 rows affected (0.42 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+mysql> SELECT * FROM Temp WHERE Worker_Id = 6 AND 7;
++-----------+-----------+--------+--------------+------------+
+| Worker_Id | Last_name | Salary | Joining_date | Department |
++-----------+-----------+--------+--------------+------------+
+|         6 | Diwan     | 200000 | 2014-06-20   | ACCOUNT    |
++-----------+-----------+--------+--------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Temp WHERE Worker_Id = 7;
++-----------+-----------+--------+--------------+------------+
+| Worker_Id | Last_name | Salary | Joining_date | Department |
++-----------+-----------+--------+--------------+------------+
+|         7 | Kumar     | 750000 | 2014-01-20   | ACCOUNT    |
++-----------+-----------+--------+--------------+------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT * FROM Worker WHERE First_name like'%h';
++-----------+------------+-----------+--------+--------------+------------+
+| Worker_Id | First_name | Last_name | Salary | Joining_date | Department |
++-----------+------------+-----------+--------+--------------+------------+
+|         4 | AmitAbh    | Singh     | 500000 | 2014-02-20   | ADMIN      |
+|         7 | SAthish    | Kumar     | 750000 | 2014-01-20   | ACCOUNT    |
++-----------+------------+-----------+--------+--------------+------------+
+2 rows in set (0.00 sec)
+
+mysql>
+mysql> USE world
+Database changed
+mysql>
+mysql> CREATE TABLE Employeeinfo(Employee_id INT(200),NOT NULL AUTO_INCREMENT,Employee_firstname VARCHAR(200) NOT NULL,E
+mployee_lastname VARCHAR(200) NOT NULL,Project varchar(50) Not Null,Address varchar(255) NOT NULL,Gender VARCHAR(200)NOT
+ NULL,CONSTRAINT Employeeinfo_pk PRIMARY KEY(Employee_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version
+ for the right syntax to use near 'NOT NULL AUTO_INCREMENT,Employee_firstname VARCHAR(200) NOT NULL,Employee_lastna' at
+line 1
+mysql> CREATE TABLE Employeeinfo(Employee_id INT(200),NOT NULL,AUTO_INCREMENT,Employee_firstname VARCHAR(200) NOT NULL,E
+mployee_lastname VARCHAR(200) NOT NULL,Project varchar(50) Not Null,Address varchar(255) NOT NULL,Gender VARCHAR(200)NOT
+ NULL,CONSTRAINT Employeeinfo_pk PRIMARY KEY(Employee_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version
+ for the right syntax to use near 'NOT NULL,AUTO_INCREMENT,Employee_firstname VARCHAR(200) NOT NULL,Employee_lastna' at
+line 1
+mysql>
+mysql>
+mysql>
+mysql> CREATE TABLE Employeeinfo(Employee_id INT(200) NOT NULL AUTO_INCREMENT,
+    -> Employee_firstname VARCHAR(200) NOT NULL,
+    -> Employee_lastname VARCHAR(200) NOT NULL,
+    -> Project varchar(50) Not Null,
+    -> Address varchar(255) NOT NULL,
+    -> Gender VARCHAR(200)NOT NULL,
+    -> CONSTRAINT Employeeinfo_pk PRIMARY KEY(Employee_id)
+    -> );
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> SELECT * FROM Employeeinfo
+    -> ;
+Empty set (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Employeeinfo(1,"Sanjay","kumar","P1","Porur chennai","Male");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version
+ for the right syntax to use near '1,"Sanjay","kumar","P1","Porur chennai","Male")' at line 1
+mysql> INSERT INTO Employeeinfo VALUES(1,"Sanjay","kumar","P1","Porur chennai","Male");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT* FROM Employeeinfo;
++-------------+--------------------+-------------------+---------+---------------+--------+
+| Employee_id | Employee_firstname | Employee_lastname | Project | Address       | Gender |
++-------------+--------------------+-------------------+---------+---------------+--------+
+|           1 | Sanjay             | kumar             | P1      | Porur chennai | Male   |
++-------------+--------------------+-------------------+---------+---------------+--------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE Employeeinfo ADD Dob DATE;
+Query OK, 0 rows affected (0.62 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Dob VALUES('2014-06-02') WHERE Employee_id = 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version
+ for the right syntax to use near 'WHERE Employee_id = 1' at line 1
+mysql> INSERT INTO Dob VALUES('2014-06-02');
+ERROR 1146 (42S02): Table 'world.dob' doesn't exist
+mysql> INSERT INTO Employeeinfo.Dob VALUES('2014-06-02');
+ERROR 1146 (42S02): Table 'employeeinfo.dob' doesn't exist
+mysql>
+mysql>
+mysql> INSERT INTO Employeeinfo.Dob VALUES('2014-06-02');
+ERROR 1146 (42S02): Table 'employeeinfo.dob' doesn't exist
+mysql> INSERT INTO Dob VALUES('2014-06-02') WHEREEmployee.Employee_id = 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version
+ for the right syntax to use near 'WHEREEmployee.Employee_id = 1' at line 1
+mysql> INSERT INTO Dob VALUES('2014-06-02') WHERE Employee.Employee_id = 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version
+ for the right syntax to use near 'WHERE Employee.Employee_id = 1' at line 1
+mysql>
+mysql>
+mysql> UPDATE Employeeinfo SET Dob =  '2014-06-02';
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT* FROM Employeeinfo;
++-------------+--------------------+-------------------+---------+---------------+--------+------------+
+| Employee_id | Employee_firstname | Employee_lastname | Project | Address       | Gender | Dob        |
++-------------+--------------------+-------------------+---------+---------------+--------+------------+
+|           1 | Sanjay             | kumar             | P1      | Porur chennai | Male   | 2014-06-02 |
++-------------+--------------------+-------------------+---------+---------------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO Employeeinfo VALUES(2,"Sanjeev","kahan","P2","Coutrallam Tenkasi","Male","2001-01-03");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT* FROM Employeeinfo;
++-------------+--------------------+-------------------+---------+--------------------+--------+------------+
+| Employee_id | Employee_firstname | Employee_lastname | Project | Address            | Gender | Dob        |
++-------------+--------------------+-------------------+---------+--------------------+--------+------------+
+|           1 | Sanjay             | kumar             | P1      | Porur chennai      | Male   | 2014-06-02 |
+|           2 | Sanjeev            | kahan             | P2      | Coutrallam Tenkasi | Male   | 2001-01-03 |
++-------------+--------------------+-------------------+---------+--------------------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO Employeeinfo VALUES(3,"Kalyani","kalyanasundharam","P3","Valasaravakam chennai","Female","2002-10-04"
+);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT* FROM Employeeinfo;
++-------------+--------------------+-------------------+---------+-----------------------+--------+------------+
+| Employee_id | Employee_firstname | Employee_lastname | Project | Address               | Gender | Dob        |
++-------------+--------------------+-------------------+---------+-----------------------+--------+------------+
+|           1 | Sanjay             | kumar             | P1      | Porur chennai         | Male   | 2014-06-02 |
+|           2 | Sanjeev            | kahan             | P2      | Coutrallam Tenkasi    | Male   | 2001-01-03 |
+|           3 | Kalyani            | kalyanasundharam  | P3      | Valasaravakam chennai | Female | 2002-10-04 |
++-------------+--------------------+-------------------+---------+-----------------------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO Employeeinfo VALUES(4,"Gomathi","sankaralaingam","P4","Melagaram Tenkasi","Female","2003-11-28");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO Employeeinfo VALUES(5,"Raju","balasuburamaniyan","P5","Kasimajapuram Tirunelveli","Female","2005-10-1
+5");
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT* FROM Employeeinfo;
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+| Employee_id | Employee_firstname | Employee_lastname | Project | Address                   | Gender | Dob        |
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+|           1 | Sanjay             | kumar             | P1      | Porur chennai             | Male   | 2014-06-02 |
+|           2 | Sanjeev            | kahan             | P2      | Coutrallam Tenkasi        | Male   | 2001-01-03 |
+|           3 | Kalyani            | kalyanasundharam  | P3      | Valasaravakam chennai     | Female | 2002-10-04 |
+|           4 | Gomathi            | sankaralaingam    | P4      | Melagaram Tenkasi         | Female | 2003-11-28 |
+|           5 | Raju               | balasuburamaniyan | P5      | Kasimajapuram Tirunelveli | Female | 2005-10-15 |
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE Employeeinfo SET GENDER ="MALE" WHERE Employee_id = 5;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT* FROM Employeeinfo;
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+| Employee_id | Employee_firstname | Employee_lastname | Project | Address                   | Gender | Dob        |
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+|           1 | Sanjay             | kumar             | P1      | Porur chennai             | Male   | 2014-06-02 |
+|           2 | Sanjeev            | kahan             | P2      | Coutrallam Tenkasi        | Male   | 2001-01-03 |
+|           3 | Kalyani            | kalyanasundharam  | P3      | Valasaravakam chennai     | Female | 2002-10-04 |
+|           4 | Gomathi            | sankaralaingam    | P4      | Melagaram Tenkasi         | Female | 2003-11-28 |
+|           5 | Raju               | balasuburamaniyan | P5      | Kasimajapuram Tirunelveli | MALE   | 2005-10-15 |
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE Employeeinfo SET GENDER ="Male" WHERE Employee_id = 5;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT* FROM Employeeinfo;
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+| Employee_id | Employee_firstname | Employee_lastname | Project | Address                   | Gender | Dob        |
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+|           1 | Sanjay             | kumar             | P1      | Porur chennai             | Male   | 2014-06-02 |
+|           2 | Sanjeev            | kahan             | P2      | Coutrallam Tenkasi        | Male   | 2001-01-03 |
+|           3 | Kalyani            | kalyanasundharam  | P3      | Valasaravakam chennai     | Female | 2002-10-04 |
+|           4 | Gomathi            | sankaralaingam    | P4      | Melagaram Tenkasi         | Female | 2003-11-28 |
+|           5 | Raju               | balasuburamaniyan | P5      | Kasimajapuram Tirunelveli | Male   | 2005-10-15 |
++-------------+--------------------+-------------------+---------+---------------------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql>
+
